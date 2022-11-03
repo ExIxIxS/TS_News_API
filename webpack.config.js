@@ -18,8 +18,9 @@ const baseConfig = {
         extensions: ['.js'],
     },
     output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, '../dist'),
+        filename: '[name].[contenthash].js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -1,9 +1,5 @@
 import './sources.css';
-
-export interface sourceItemObj {
-    name: string;
-    id: string;
-}
+import { sourceItemObj } from '../appView';
 
 class Sources {
     draw(data: sourceItemObj[]) {

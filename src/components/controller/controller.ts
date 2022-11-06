@@ -1,45 +1,10 @@
 import AppLoader from './appLoader';
+import { articleData, sourceData } from '../view/appView';
 
-interface articleObj {
-    source: {
-        id: string;
-        name: string;
-    };
-    author: string;
-    title: string;
-    description: string;
-    url: string;
-    urlToImage: string;
-    publishedAt: string;
-    content: string;
-}
-
-interface articleData {
-    status: string;
-    totalResults: number;
-    articles: articleObj[];
-}
-
-interface sourceObj {
-    id: string;
-    name: string;
-    description: string;
-    url: string;
-    category: string;
-    language: string;
-    country: string;
-}
-
-interface sourceData {
-    status: string;
-    sources: sourceObj[];
-}
-
-type getNewsType = (data?: articleData) => void;
-type getSrcType = (data?: sourceData) => void;
+type getFunc<Type> = (data?: Type) => void;
 
 class AppController extends AppLoader {
-    getSources(callback: getSrcType) {
+    getSources(callback: getFunc<sourceData>) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -48,7 +13,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: getNewsType) {
+    getNews(e: Event, callback: getFunc<articleData>) {
         let target = e.target as Element;
         const newsContainer = e.currentTarget as Element;
 

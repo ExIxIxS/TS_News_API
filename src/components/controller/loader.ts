@@ -1,32 +1,29 @@
+import { sourceData } from '../view/appView';
+
+enum endpoint {
+    'sources',
+    'everything',
+    'top-headlines',
+}
+
 interface apiKeyObj {
     apiKey: string;
 }
 
-interface getResp {
-    endpoint: string;
-    options?: { sources?: string };
+interface sourceObj {
+    sources: string;
 }
 
-interface newsObj {
-    category: string;
-    country: string;
-    description: string;
-    id: string;
-    language: string;
-    name: string;
-    url: string;
+interface getRespObj {
+    endpoint: keyof typeof endpoint;
+    options?: Partial<sourceObj>;
 }
 
-interface data {
-    status: string;
-    sources: newsObj[];
-}
-
-type loadCallBack = (arg: data) => void;
+type loadCallBack<Type> = (arg: Type) => void;
 
 class Loader {
-    baseLink: string;
-    options: apiKeyObj;
+    private baseLink: string;
+    public readonly options: apiKeyObj;
 
     constructor(baseLink: string, options: apiKeyObj) {
         this.baseLink = baseLink;
@@ -34,7 +31,7 @@ class Loader {
     }
 
     getResp(
-        { endpoint, options = {} }: getResp,
+        { endpoint, options = {} }: getRespObj,
         callback = () => {
             console.error('No callback for GET response');
         }
@@ -63,7 +60,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: loadCallBack, options = {}): void {
+    load(method: string, endpoint: string, callback: loadCallBack<sourceData>, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

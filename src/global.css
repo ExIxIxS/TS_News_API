@@ -1,35 +1,145 @@
+/* page color styling */
+:root {
+    --bg-color-1: #ffffff;
+    --font-color-1: #000000;
+    --font-color-2: #f87721;
+    --font-color-3: #ffffff;
+    --font-color-4:#a2a2a2;
+}
+
+/* abril-fatface-regular - latin */
+@font-face {
+    font-family: 'Abril Fatface';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('./assets/fonts/abril-fatface-v19-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('./assets/fonts/abril-fatface-v19-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
 body {
-    color: #fff;
-    background: #17181c;
+    background-color: var(--bg-color-1);
+    background-image: url("./assets/img/questions.jpg");
+    background-size: 700px;
+    color: var(--font-color-1);
     font-family: sans-serif;
 }
 
 header {
-    padding: 10px 30px;
+    padding: 11px 0;
+    text-align: center;
+    color: var(--font-color-1);
+    background-color: var(--bg-color-1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 header h1 {
+    font-family: 'Abril Fatface', 'Arial Black', sans-serif;
     font-size: 40px;
-    font-weight: 800;
+    font-weight: 400;
+    margin: 16px 0;
+}
+
+main {
+    display: flex;
+}
+
+.central-logo {
+    width: 400px;
+    height: 400px;
+    margin: calc(34vh - 190px) auto 0 auto;
+    border-radius: 50% 15px 50% 50%;
+    background-color: var(--bg-color-1);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url("./assets/img/newspaper_boy.png");
 }
 
 footer {
-    height: 100px;
     display: flex;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
+    height: 90px;
+    background-color: var(--bg-color-1);
+    font-size: 1.2vw;
+    color: var(--font-color-1);
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
 }
-footer .copyright {
-    font-size: 14px;
-    color: #333;
-    text-align: center;
+
+footer a {
+    font-size: 1.2vw;
 }
-footer .copyright a {
-    color: #444;
+
+#github-logo {
+    width: 40px;
+    height: 40px;
+    fill: var(--font-color-1);
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
 }
-footer .copyright a:hover {
-    color: #555;
+
+#rss-logo {
+    width: auto;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
 }
-footer .copyright:before {
-    content: '©';
+
+p.foot-block {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.anchor:link, .anchor:visited {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    color: var(--font-color-1);
+    text-decoration: none;
+}
+
+.anchor:hover, a:active {
+    color: var(--font-color-1);
+    text-decoration: none;
+}
+
+@media (max-width: 1124px) {
+    main {
+       flex-direction: column;
+    }
+
+}
+
+@media (max-height: 580px) {
+    .central-logo {
+        display: none;
+    }
+
+}
+
+@media (max-width: 540px) {
+    .central-logo {
+        width: calc(400vw*100 / 540);
+        height: calc(400vw*100 / 540);
+    }
+
+    p.foot-block, .anchor:link, .anchor:visited {
+        font-size: 15px;
+    }
+
+    #github-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    #rss-logo {
+        height: 30px;
+
+    }
 }

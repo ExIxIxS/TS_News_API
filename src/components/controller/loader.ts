@@ -19,11 +19,15 @@ interface getRespObj {
     options?: Partial<sourceObj>;
 }
 
+interface options {
+    sources?: string;
+}
+
 type loadCallBack<Type> = (arg: Type) => void;
 
 class Loader {
-    private baseLink: string;
-    public readonly options: apiKeyObj;
+    private baseLink;
+    public readonly options;
 
     constructor(baseLink: string, options: apiKeyObj) {
         this.baseLink = baseLink;
@@ -49,7 +53,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: { sources?: string }, endpoint: string) {
+    makeUrl(options: options, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -60,7 +64,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: loadCallBack<sourceData>, options = {}): void {
+    load(method: string, endpoint: string, callback: loadCallBack<sourceData>, options: options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

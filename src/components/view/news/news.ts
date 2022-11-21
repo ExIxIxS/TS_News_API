@@ -8,9 +8,9 @@ class News {
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
         news.forEach((item, idx) => {
-            const newsClone = newsItemTemp.content.cloneNode(true) as Element;
+            const newsClone = newsItemTemp.content.cloneNode(true) as HTMLElement;
 
-            if (idx % 2) (newsClone.querySelector('.news__item') as Element).classList.add('alt');
+            if (idx % 2) (newsClone.querySelector('.news__item') as HTMLElement).classList.add('alt');
 
             (newsClone.querySelector('.news__meta-photo') as HTMLStyleElement).style.backgroundImage = `url(${
                 item.urlToImage || 'img/news_placeholder.jpg'
@@ -30,8 +30,8 @@ class News {
             fragment.append(newsClone);
         });
 
-        (document.querySelector('.news') as Element).innerHTML = '';
-        (document.querySelector('.news') as Element).appendChild(fragment);
+        (document.querySelector('.news') as HTMLElement).innerHTML = '';
+        (document.querySelector('.news') as HTMLElement).appendChild(fragment);
     }
 }
 

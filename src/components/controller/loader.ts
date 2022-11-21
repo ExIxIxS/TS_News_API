@@ -25,6 +25,8 @@ interface options {
 
 type loadCallBack<Type> = (arg: Type) => void;
 
+type errorCallBack = () => void;
+
 class Loader {
     private baseLink;
     public readonly options;
@@ -36,7 +38,7 @@ class Loader {
 
     getResp(
         { endpoint, options = {} }: getRespObj,
-        callback = () => {
+        callback: errorCallBack = () => {
             console.error('No callback for GET response');
         }
     ) {
